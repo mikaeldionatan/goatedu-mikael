@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemma 4 no iPhone — IA Local, Sem Internet</title>
+    <title>Guia Gemma 4 no iPhone — IA Local, Sem Internet</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-blue: #00d1ff;
-            --neon-purple: #a855f7;
-            --neon-pink: #ec4899;
-            --bg-dark: #0a0a12;
-            --bg-card: rgba(15, 15, 30, 0.85);
-            --bg-card-border: rgba(0, 209, 255, 0.2);
-            --text-primary: #e0e0f0;
-            --text-secondary: #8888bb;
-            --text-muted: #555577;
-            --glow-blue: 0 0 20px rgba(0, 209, 255, 0.5);
-            --glow-purple: 0 0 20px rgba(168, 85, 247, 0.5);
-            --gradient-neon: linear-gradient(135deg, #00d1ff, #a855f7, #ec4899);
-            --gradient-blue-purple: linear-gradient(135deg, #00d1ff, #a855f7);
+            --accent: #00FFAA;
+            --accent-dim: #00FFAA33;
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(15, 15, 25, 0.75);
+            --bg-card-border: rgba(0, 255, 170, 0.15);
+            --text-primary: #e0e0e8;
+            --text-secondary: #8888aa;
+            --text-muted: #555570;
+            --gradient-accent: linear-gradient(135deg, #00FFAA, #00CCFF);
+            --glow: 0 0 20px rgba(0, 255, 170, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,17 +37,11 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             background-image:
-                linear-gradient(rgba(0, 209, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 209, 255, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(0, 255, 170, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 170, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
             z-index: 0;
             pointer-events: none;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
         }
 
         body::after {
@@ -58,17 +49,15 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: radial-gradient(ellipse at 20% 20%, rgba(0, 209, 255, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
-            z-index: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.03) 2px,
+                rgba(0, 0, 0, 0.03) 4px
+            );
+            z-index: 9999;
             pointer-events: none;
-            animation: aurora 8s ease-in-out infinite;
-        }
-
-        @keyframes aurora {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
         }
 
         #particles {
@@ -89,250 +78,137 @@
 
         .hero {
             text-align: center;
-            padding: 100px 20px 80px;
+            padding: 80px 20px 60px;
             position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 209, 255, 0.15) 0%, transparent 70%);
-            animation: heroGlow 3s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes heroGlow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
         }
 
         .hero-badge {
             display: inline-block;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 3px;
             text-transform: uppercase;
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            border: 1px solid rgba(0, 209, 255, 0.3);
-            padding: 8px 20px;
-            border-radius: 4px;
-            margin-bottom: 30px;
-            animation: badgePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(0, 209, 255, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(0, 209, 255, 0.6); }
+            color: var(--accent);
+            border: 1px solid var(--accent-dim);
+            padding: 6px 18px;
+            border-radius: 2px;
+            margin-bottom: 24px;
+            background: rgba(0, 255, 170, 0.05);
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 7vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 900;
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 20px;
-            background: var(--gradient-neon);
+            background: var(--gradient-accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(0, 209, 255, 0.3);
-            animation: titleGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
-        }
-
-        .hero h1 span {
-            display: block;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-top: 10px;
-            font-weight: 600;
         }
 
         .hero p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            max-width: 650px;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.8;
-            font-size: 18px;
         }
 
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 50px;
-            margin-top: 50px;
+            gap: 40px;
+            margin-top: 40px;
             flex-wrap: wrap;
         }
 
         .hero-stat {
             text-align: center;
-            position: relative;
-        }
-
-        .hero-stat::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: var(--gradient-blue-purple);
-            border-radius: 2px;
-            animation: statLine 2s ease-in-out infinite;
-        }
-
-        @keyframes statLine {
-            0%, 100% { width: 60px; opacity: 1; }
-            50% { width: 80px; opacity: 0.7; }
         }
 
         .hero-stat .number {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: var(--gradient-neon);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
             display: block;
-            animation: numberPop 0.5s ease-out;
-        }
-
-        @keyframes numberPop {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
         }
 
         .hero-stat .label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-top: 8px;
+            margin-top: 4px;
         }
 
         .section {
-            margin-bottom: 60px;
-            animation: fadeInUp 0.6s ease both;
-        }
-
-        .section:nth-child(2) { animation-delay: 0.1s; }
-        .section:nth-child(3) { animation-delay: 0.15s; }
-        .section:nth-child(4) { animation-delay: 0.2s; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 50px;
         }
 
         .section-number {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            display: inline-block;
-            animation: sectionNumberGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes sectionNumberGlow {
-            0%, 100% { filter: drop-shadow(0 0 2px rgba(0, 209, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 10px rgba(0, 209, 255, 0.8)); }
+            margin-bottom: 8px;
+            opacity: 0.7;
         }
 
         .section h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
-            padding-left: 20px;
-            border-left: 4px solid;
-            border-image: var(--gradient-blue-purple) 1;
+            padding-left: 16px;
+            border-left: 3px solid var(--accent);
         }
 
         .card {
             background: var(--bg-card);
             border: 1px solid var(--bg-card-border);
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 24px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            border-radius: 8px;
+            padding: 28px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 255, 170, 0.35);
         }
 
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 209, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .card:hover::before {
-            left: 100%;
-        }
-
-        .card:hover {
-            border-color: rgba(0, 209, 255, 0.5);
-            box-shadow: var(--glow-blue), 0 0 40px rgba(0, 209, 255, 0.1);
-            transform: translateY(-4px);
-        }
-
-        .card::after {
-            content: '';
-            position: absolute;
             top: 0; left: 0;
-            width: 100%; height: 2px;
-            background: var(--gradient-blue-purple);
-            opacity: 0.6;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.4;
         }
 
         .card h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
+            color: var(--accent);
+            margin-bottom: 14px;
         }
 
         .card p, .card li {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            line-height: 1.85;
+            line-height: 1.8;
         }
 
         .card ul {
@@ -341,83 +217,49 @@
         }
 
         .card ul li {
-            padding: 8px 0 8px 24px;
+            padding: 6px 0 6px 20px;
             position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .card ul li:hover {
-            padding-left: 30px;
-            color: var(--neon-blue);
         }
 
         .card ul li::before {
-            content: '▹';
+            content: '▸';
             position: absolute;
             left: 0;
-            color: var(--neon-blue);
-            font-size: 0.9rem;
-            animation: listArrow 1s ease-in-out infinite;
-        }
-
-        @keyframes listArrow {
-            0%, 100% { transform: translateX(0); opacity: 1; }
-            50% { transform: translateX(5px); opacity: 0.7; }
+            color: var(--accent);
+            font-size: 0.8rem;
         }
 
         .model-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 18px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
         }
 
         .model-item {
-            background: linear-gradient(135deg, rgba(0, 209, 255, 0.05), rgba(168, 85, 247, 0.05));
+            background: rgba(0, 255, 170, 0.03);
             border: 1px solid var(--bg-card-border);
-            border-radius: 12px;
-            padding: 24px 18px;
+            border-radius: 6px;
+            padding: 20px;
             text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .model-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(0, 209, 255, 0.2) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .model-item:hover::before {
-            opacity: 1;
+            transition: all 0.3s ease;
         }
 
         .model-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--neon-blue);
-            box-shadow: var(--glow-blue), 0 20px 40px rgba(0, 209, 255, 0.15);
+            background: rgba(0, 255, 170, 0.08);
+            transform: translateY(-2px);
         }
 
         .model-item .model-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            background: var(--gradient-neon);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
         }
 
         .model-item .model-desc {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             line-height: 1.6;
         }
@@ -425,197 +267,122 @@
         .model-item .model-tag {
             display: inline-block;
             font-size: 0.6rem;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             color: var(--bg-dark);
-            background: var(--gradient-blue-purple);
-            padding: 4px 12px;
-            border-radius: 4px;
-            margin-top: 14px;
-            animation: tagPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes tagPulse {
-            0%, 100% { box-shadow: 0 0 5px rgba(0, 209, 255, 0.5); }
-            50% { box-shadow: 0 0 15px rgba(0, 209, 255, 0.8); }
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(0, 209, 255, 0.1), rgba(168, 85, 247, 0.1));
-            border: 1px solid rgba(0, 209, 255, 0.3);
-            border-left: 4px solid var(--neon-blue);
-            padding: 24px 28px;
-            border-radius: 0 12px 12px 0;
-            margin: 24px 0;
-            position: relative;
-            animation: highlightBoxGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes highlightBoxGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(0, 209, 255, 0.1); }
-            50% { box-shadow: 0 0 25px rgba(0, 209, 255, 0.25); }
-        }
-
-        .highlight-box p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.85;
-        }
-
-        .highlight-box strong {
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: var(--accent);
+            padding: 2px 10px;
+            border-radius: 2px;
+            margin-top: 10px;
         }
 
         .step {
             display: flex;
-            gap: 24px;
-            margin-bottom: 28px;
+            gap: 20px;
+            margin-bottom: 24px;
             align-items: flex-start;
-            padding: 20px;
-            background: rgba(0, 209, 255, 0.03);
-            border-radius: 12px;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .step:hover {
-            background: rgba(0, 209, 255, 0.08);
-            border-color: rgba(0, 209, 255, 0.2);
-            transform: translateX(10px);
         }
 
         .step-number {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 900;
-            background: var(--gradient-neon);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            min-width: 45px;
-            animation: stepNumberPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes stepNumberPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+            color: var(--accent);
+            min-width: 40px;
+            opacity: 0.5;
         }
 
         .step-content h4 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .step-content p {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-secondary);
-            line-height: 1.75;
+            line-height: 1.7;
         }
 
         .code-block {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(15, 15, 30, 0.6));
-            border: 1px solid rgba(0, 209, 255, 0.2);
-            border-radius: 8px;
-            padding: 20px 24px;
-            margin: 18px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 170, 0.1);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin: 14px 0;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--neon-blue);
+            font-size: 0.78rem;
+            color: var(--accent);
             overflow-x: auto;
             position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .code-block:hover {
-            border-color: rgba(168, 85, 247, 0.5);
-            box-shadow: 0 0 20px rgba(0, 209, 255, 0.2);
         }
 
         .code-block .label {
             position: absolute;
-            top: 10px;
-            right: 14px;
-            font-size: 0.6rem;
-            color: var(--neon-purple);
+            top: 8px;
+            right: 12px;
+            font-size: 0.55rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.08), rgba(0, 204, 255, 0.05));
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .highlight-box strong {
+            color: var(--accent);
         }
 
         .usecase-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 18px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
         }
 
         .usecase-item {
             background: var(--bg-card);
             border: 1px solid var(--bg-card-border);
-            border-radius: 12px;
-            padding: 28px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .usecase-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 209, 255, 0.1) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .usecase-item:hover::before {
-            opacity: 1;
-            animation: usecaseRotate 4s linear infinite;
-        }
-
-        @keyframes usecaseRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.3s ease;
         }
 
         .usecase-item:hover {
-            border-color: var(--neon-purple);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--glow-purple), 0 20px 50px rgba(168, 85, 247, 0.2);
+            border-color: rgba(0, 255, 170, 0.4);
+            box-shadow: var(--glow);
         }
 
         .usecase-icon {
-            font-size: 2.2rem;
-            margin-bottom: 14px;
-            display: inline-block;
-            animation: iconBounce 2s ease-in-out infinite;
-        }
-
-        @keyframes iconBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            font-size: 1.8rem;
+            margin-bottom: 12px;
         }
 
         .usecase-item h4 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .usecase-item p {
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
             line-height: 1.7;
         }
@@ -623,54 +390,44 @@
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.82rem;
-            border-radius: 12px;
-            overflow: hidden;
+            margin: 16px 0;
+            font-size: 0.78rem;
         }
 
         .comparison-table th {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            padding: 14px 18px;
+            padding: 12px 16px;
             text-align: left;
             border-bottom: 1px solid var(--bg-card-border);
+            background: rgba(0, 255, 170, 0.04);
         }
 
         .comparison-table td {
-            padding: 12px 18px;
+            padding: 10px 16px;
             color: var(--text-secondary);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            transition: all 0.3s ease;
         }
 
         .comparison-table tr:hover td {
-            background: rgba(0, 209, 255, 0.05);
+            background: rgba(0, 255, 170, 0.03);
         }
 
         .faq-item {
             border: 1px solid var(--bg-card-border);
-            border-radius: 10px;
-            margin-bottom: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            border-color: rgba(0, 209, 255, 0.4);
         }
 
         .faq-question {
-            padding: 18px 24px;
+            padding: 16px 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             font-weight: 600;
             color: var(--text-primary);
             cursor: pointer;
@@ -678,20 +435,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .faq-question:hover {
-            background: rgba(0, 209, 255, 0.08);
-            padding-left: 30px;
+            background: rgba(0, 255, 170, 0.05);
         }
 
         .faq-question .toggle {
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.4rem;
+            color: var(--accent);
+            font-size: 1.2rem;
             transition: transform 0.3s ease;
         }
 
@@ -703,86 +456,58 @@
 
         .faq-answer.open {
             max-height: 300px;
-            padding: 18px 24px;
+            padding: 16px 20px;
         }
 
         .faq-answer p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            line-height: 1.85;
-            animation: faqFadeIn 0.3s ease;
-        }
-
-        @keyframes faqFadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            line-height: 1.8;
         }
 
         .footer {
             text-align: center;
-            padding: 80px 20px 50px;
+            padding: 60px 20px 40px;
             border-top: 1px solid var(--bg-card-border);
-            margin-top: 80px;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 2px;
-            background: var(--gradient-neon);
+            margin-top: 60px;
         }
 
         .footer p {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             letter-spacing: 1px;
         }
 
         .footer a {
-            background: var(--gradient-blue-purple);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            text-shadow: 0 0 20px rgba(0, 209, 255, 0.8);
         }
 
         .footer .brand {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            background: var(--gradient-neon);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
             display: block;
-            animation: brandGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes brandGlow {
-            0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 209, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 15px rgba(0, 209, 255, 0.9)); }
         }
 
         @media (max-width: 600px) {
-            .hero-stats { gap: 30px; }
-            .hero-stat .number { font-size: 2rem; }
-            .step { flex-direction: column; gap: 12px; }
-            .card { padding: 24px; }
+            .hero-stats { gap: 24px; }
+            .step { flex-direction: column; gap: 8px; }
+            .card { padding: 20px; }
             .container { padding: 14px; }
-            .model-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section { animation: fadeInUp 0.6s ease both; }
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.15s; }
+        .section:nth-child(4) { animation-delay: 0.2s; }
     </style>
 </head>
 <body>
@@ -792,8 +517,8 @@
 <div class="container">
 
     <div class="hero">
-        <span class="hero-badge">▸ GUIA COMPLETO — ABRIL 2026</span>
-        <h1>Gemma 4<span>no iPhone</span></h1>
+        <span class="hero-badge">Guia Completo — Abril 2026</span>
+        <h1>Gemma 4 no iPhone</h1>
         <p>IA local, sem internet, rodando direto no seu bolso. Aprenda a instalar, configurar e usar o modelo open-source mais poderoso do Google no iPhone.</p>
 
         <div class="hero-stats">
@@ -811,25 +536,25 @@
             </div>
             <div class="hero-stat">
                 <span class="number">0</span>
-                <span class="label">Dados pra nuvem</span>
+                <span class="label">Dados enviados pra nuvem</span>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-number">01 — OVERVIEW</div>
+        <div class="section-number">01 — Overview</div>
         <h2>O que é o Gemma 4</h2>
 
         <div class="card">
-            <p>O <strong style="background: linear-gradient(135deg, #00d1ff, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Gemma 4</strong> é a família de modelos open-source mais avançada do Google DeepMind, lançada em 2 de abril de 2026. Construído a partir da mesma pesquisa do Gemini 3, o Gemma 4 entrega inteligência de nível frontier — mas roda no seu hardware.</p>
+            <p>O <strong style="color:var(--accent)">Gemma 4</strong> é a família de modelos open-source mais avançada do Google DeepMind, lançada em 2 de abril de 2026. Construído a partir da mesma pesquisa do Gemini 3, o Gemma 4 entrega inteligência de nível frontier — mas roda no seu hardware.</p>
             <br>
             <p>Diferente de modelos como o GPT ou o próprio Gemini (que rodam na nuvem), o Gemma 4 foi projetado pra rodar 100% local. Isso significa: sem internet, sem envio de dados, sem latência de servidor. Tudo acontece dentro do dispositivo.</p>
             <br>
-            <p>O modelo é licenciado sob <strong style="background: linear-gradient(135deg, #00d1ff, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Apache 2.0</strong> — uso comercial liberado, sem restrições de modificação ou deploy.</p>
+            <p>O modelo é licenciado sob <strong style="color:var(--accent)">Apache 2.0</strong> — uso comercial liberado, sem restrições de modificação ou deploy.</p>
         </div>
 
         <div class="card">
-            <h3>▸ Família de Modelos</h3>
+            <h3>Família de Modelos</h3>
             <div class="model-grid">
                 <div class="model-item">
                     <div class="model-name">E2B</div>
@@ -843,12 +568,12 @@
                 </div>
                 <div class="model-item">
                     <div class="model-name">26B A4B</div>
-                    <div class="model-desc">Mixture-of-Experts. 26B total, 4B ativos.</div>
+                    <div class="model-desc">Mixture-of-Experts. 26B total, 4B ativos. Pra GPU dedicada.</div>
                     <span class="model-tag">Desktop</span>
                 </div>
                 <div class="model-item">
                     <div class="model-name">31B Dense</div>
-                    <div class="model-desc">O maior e mais capaz. Performance frontier.</div>
+                    <div class="model-desc">O maior e mais capaz. Performance frontier em GPU.</div>
                     <span class="model-tag">Desktop</span>
                 </div>
             </div>
@@ -860,11 +585,11 @@
     </div>
 
     <div class="section">
-        <div class="section-number">02 — DIFERENCIAIS</div>
+        <div class="section-number">02 — Diferenciais</div>
         <h2>Por que o Gemma 4 é tão poderoso</h2>
 
         <div class="card">
-            <h3>▸ Capacidades Nativas</h3>
+            <h3>Capacidades Nativas</h3>
             <ul>
                 <li><strong style="color:var(--text-primary)">Raciocínio avançado</strong> — Thinking Mode configurável com chain-of-thought. Você vê o modelo "pensando" passo a passo.</li>
                 <li><strong style="color:var(--text-primary)">Multimodal</strong> — Processa texto, imagem, vídeo (como sequência de frames) e áudio (nos modelos E2B e E4B).</li>
@@ -876,44 +601,50 @@
         </div>
 
         <div class="card">
-            <h3>▸ Gemma 4 vs. Concorrentes</h3>
+            <h3>Gemma 4 vs. Concorrentes (Modelos On-Device)</h3>
             <table class="comparison-table">
                 <thead>
                     <tr>
                         <th>Recurso</th>
-                        <th>Gemma 4</th>
-                        <th>Llama 4</th>
-                        <th>Phi-4</th>
+                        <th>Gemma 4 E2B/E4B</th>
+                        <th>Llama 4 Scout</th>
+                        <th>Phi-4 Mini</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Licença</td>
-                        <td style="color:var(--neon-blue)">Apache 2.0</td>
-                        <td>Llama</td>
+                        <td style="color:var(--accent)">Apache 2.0</td>
+                        <td>Llama License</td>
                         <td>MIT</td>
                     </tr>
                     <tr>
                         <td>Multimodal</td>
-                        <td style="color:var(--neon-blue)">+Áudio</td>
-                        <td>Texto+Img</td>
-                        <td>Texto+Img</td>
+                        <td style="color:var(--accent)">Texto + Imagem + Áudio</td>
+                        <td>Texto + Imagem</td>
+                        <td>Texto + Imagem</td>
                     </tr>
                     <tr>
-                        <td>Thinking</td>
-                        <td style="color:var(--neon-blue)">✓ Sim</td>
+                        <td>Thinking Mode</td>
+                        <td style="color:var(--accent)">Sim (configurável)</td>
                         <td>Limitado</td>
-                        <td>✗</td>
+                        <td>Não</td>
                     </tr>
                     <tr>
-                        <td>App iOS</td>
-                        <td style="color:var(--neon-blue)">✓ Gallery</td>
-                        <td>✗</td>
-                        <td>✗</td>
+                        <td>Function Calling</td>
+                        <td style="color:var(--accent)">Nativo</td>
+                        <td>Sim</td>
+                        <td>Parcial</td>
                     </tr>
                     <tr>
-                        <td>RAM</td>
-                        <td style="color:var(--neon-purple)">&lt;1.5GB</td>
+                        <td>App oficial iOS</td>
+                        <td style="color:var(--accent)">AI Edge Gallery</td>
+                        <td>Não</td>
+                        <td>Não</td>
+                    </tr>
+                    <tr>
+                        <td>RAM necessária</td>
+                        <td>&lt;1.5GB (E2B 4-bit)</td>
                         <td>~4GB+</td>
                         <td>~2GB</td>
                     </tr>
@@ -923,35 +654,35 @@
     </div>
 
     <div class="section">
-        <div class="section-number">03 — INSTALAÇÃO</div>
+        <div class="section-number">03 — Instalação</div>
         <h2>Como rodar no iPhone</h2>
 
         <div class="card">
-            <h3>▸ Requisitos</h3>
+            <h3>Requisitos</h3>
             <ul>
-                <li>iPhone com <strong style="color:var(--neon-blue)">iOS 17.0 ou superior</strong></li>
-                <li>Recomendado: iPhone 15 Pro ou superior (chip A17 Pro / A18)</li>
-                <li>Espaço: ~1-3GB dependendo do modelo</li>
-                <li>Wi-Fi apenas para download inicial</li>
+                <li>iPhone com <strong style="color:var(--text-primary)">iOS 17.0 ou superior</strong></li>
+                <li>Recomendado: iPhone 15 Pro ou superior (chip A17 Pro / A18) pra melhor performance</li>
+                <li>Espaço de armazenamento: ~1-3GB dependendo do modelo escolhido</li>
+                <li>Conexão Wi-Fi apenas para o download inicial do modelo</li>
             </ul>
         </div>
 
         <div class="card">
-            <h3>▸ Passo a Passo — Google AI Edge Gallery</h3>
+            <h3>Passo a Passo — Google AI Edge Gallery</h3>
 
             <div class="step">
                 <span class="step-number">01</span>
                 <div class="step-content">
                     <h4>Baixe o app na App Store</h4>
-                    <p>Busque por <strong style="color:var(--neon-blue)">"Google AI Edge Gallery"</strong> ou akses: <a href="https://apps.apple.com/app/google-ai-edge-gallery/id6749645337" style="color:var(--neon-purple)">apps.apple.com/app/google-ai-edge-gallery</a></p>
+                    <p>Abra a App Store e busque por <strong style="color:var(--accent)">"Google AI Edge Gallery"</strong> ou akses diretamente: <a href="https://apps.apple.com/app/google-ai-edge-gallery/id6749645337" style="color:var(--accent)">apps.apple.com/app/google-ai-edge-gallery</a>. Instale normalmente.</p>
                 </div>
             </div>
 
             <div class="step">
                 <span class="step-number">02</span>
                 <div class="step-content">
-                    <h4>Acesse a lista de modelos</h4>
-                    <p>Toque no menu (☰) e selecione <strong style="color:var(--text-primary)">"Models"</strong></p>
+                    <h4>Abra o app e akses a lista de modelos</h4>
+                    <p>Toque no ícone de menu (☰) no canto superior esquerdo e selecione <strong style="color:var(--text-primary)">"Models"</strong> pra ver todos os modelos disponíveis pra download.</p>
                 </div>
             </div>
 
@@ -959,15 +690,19 @@
                 <span class="step-number">03</span>
                 <div class="step-content">
                     <h4>Baixe o modelo Gemma 4</h4>
-                    <p>Escolha <strong style="color:var(--neon-blue)">E2B</strong> (leve) ou <strong style="color:var(--neon-purple)">E4B</strong> (capaz)</p>
+                    <p>Escolha entre <strong style="color:var(--accent)">Gemma 4 E2B</strong> (mais leve e rápido) ou <strong style="color:var(--accent)">Gemma 4 E4B</strong> (mais capaz). O download acontece direto no dispositivo. Não precisa de login no Hugging Face.</p>
+
+                    <div class="highlight-box" style="margin-top:14px">
+                        <p><strong>Recomendação:</strong> Comece pelo <strong>E2B</strong>. Ele é até 3x mais rápido que o E4B e a diferença de qualidade é menor do que parece. Se precisar de mais capacidade, suba pro E4B depois.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="step">
                 <span class="step-number">04</span>
                 <div class="step-content">
-                    <h4>Ative modo avião e teste</h4>
-                    <p>Coloque em modo avião e faça uma pergunta. Tudo local!</p>
+                    <h4>Ative o modo avião e teste</h4>
+                    <p>Depois que o download terminar, coloque o celular em <strong style="color:var(--text-primary)">modo avião</strong>. Abra o chat no app e faça uma pergunta. A resposta vai ser gerada instantaneamente — tudo local, zero internet.</p>
                 </div>
             </div>
 
@@ -975,88 +710,110 @@
                 <span class="step-number">05</span>
                 <div class="step-content">
                     <h4>Explore os recursos</h4>
-                    <p>AI Chat, Ask Image, Agent Skills, Prompt Lab, Audio Scribe e mais!</p>
+                    <p>O app tem várias ferramentas além do chat:</p>
+                    <ul style="margin-top:8px">
+                        <li><strong style="color:var(--text-primary)">AI Chat + Thinking Mode</strong> — Veja o raciocínio do modelo em tempo real</li>
+                        <li><strong style="color:var(--text-primary)">Ask Image</strong> — Tire foto e peça análise visual (identificar objetos, traduzir texto, etc.)</li>
+                        <li><strong style="color:var(--text-primary)">Agent Skills</strong> — Adicione ferramentas como Wikipedia e mapas interativos</li>
+                        <li><strong style="color:var(--text-primary)">Prompt Lab</strong> — Teste prompts com controle de temperatura, top-k e outros parâmetros</li>
+                        <li><strong style="color:var(--text-primary)">Audio Scribe</strong> — Transcreva áudio em texto usando IA local</li>
+                        <li><strong style="color:var(--text-primary)">Benchmark</strong> — Meça a performance do modelo no seu hardware</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-number">04 — CASES DE USO</div>
-        <h2>O que você pode fazer com Gemma 4</h2>
+        <div class="section-number">04 — Cases de Uso</div>
+        <h2>O que você pode fazer com Gemma 4 no iPhone</h2>
 
         <div class="usecase-grid">
             <div class="usecase-item">
                 <div class="usecase-icon">🔒</div>
                 <h4>Assistente 100% Privado</h4>
-                <p>Faça perguntas sensíveis sem que nenhum dado saia do dispositivo.</p>
+                <p>Faça perguntas sensíveis (financeiras, médicas, pessoais) sem que nenhum dado saia do dispositivo. Zero rastreamento.</p>
             </div>
             <div class="usecase-item">
                 <div class="usecase-icon">✈️</div>
                 <h4>IA Offline em Viagens</h4>
-                <p>Traduza placas e documentos em 140+ idiomas sem internet.</p>
+                <p>Traduza placas, cardápios e documentos em 140+ idiomas usando a câmera — mesmo sem Wi-Fi ou dados móveis.</p>
             </div>
             <div class="usecase-item">
                 <div class="usecase-icon">💻</div>
-                <h4>Código Local</h4>
-                <p>Escreva scripts e debug sem depender de API externa.</p>
+                <h4>Geração de Código Local</h4>
+                <p>Escreva scripts, debug e gere código direto do celular sem depender de API ou assinatura.</p>
             </div>
             <div class="usecase-item">
                 <div class="usecase-icon">📝</div>
                 <h4>Assistente de Notas</h4>
-                <p>Resuma reuniões e gere relatórios diretamente do celular.</p>
+                <p>Resuma reuniões, organize anotações e gere relatórios sem sair do celular. Integre com seus apps de produtividade.</p>
             </div>
             <div class="usecase-item">
                 <div class="usecase-icon">📸</div>
                 <h4>Análise Visual</h4>
-                <p>Aponte a câmera e peça análise de gráficos ou documentos.</p>
+                <p>Aponte a câmera pra um gráfico, documento ou produto e peça análise. O modelo processa imagem nativamente.</p>
             </div>
             <div class="usecase-item">
                 <div class="usecase-icon">🤖</div>
                 <h4>Agentes Autônomos</h4>
-                <p>Crie workflows automáticos com function calling nativo.</p>
+                <p>Com function calling nativo, crie workflows que executam ações automaticamente — no dispositivo, sem servidor.</p>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-number">05 — AVANÇADO</div>
+        <div class="section-number">05 — Avançado</div>
         <h2>Formas Alternativas de Rodar</h2>
 
         <div class="card">
-            <h3>▸ Via Ollama (Mac / Desktop)</h3>
+            <h3>Via Ollama (Mac / Desktop)</h3>
+            <p>Se você quer rodar o Gemma 4 no Mac com performance máxima:</p>
+
             <div class="code-block">
                 <span class="label">Terminal</span>
                 # Instalar Ollama<br>
                 curl -fsSL https://ollama.com/install.sh | sh<br><br>
-                # Rodar Gemma 4<br>
-                ollama run gemma4
+                # Rodar Gemma 4 (modelo padrão 26B)<br>
+                ollama run gemma4<br><br>
+                # Ou o modelo menor (E4B)<br>
+                ollama run gemma4:e4b
             </div>
         </div>
 
         <div class="card">
-            <h3>▸ Via llama.cpp (Qualquer plataforma)</h3>
+            <h3>Via llama.cpp (Qualquer plataforma)</h3>
+            <p>Pra quem quer controle total sobre quantização e performance:</p>
+
             <div class="code-block">
                 <span class="label">Terminal</span>
+                # Clonar e compilar<br>
                 git clone https://github.com/ggml-org/llama.cpp<br>
-                cd llama.cpp && cmake -B build<br><br>
+                cd llama.cpp<br>
+                cmake -B build<br>
+                cmake --build build --config Release<br><br>
+                # Rodar com GGUF (Mac Metal = automático)<br>
                 ./build/bin/llama-run \<br>
-                hf://unsloth/gemma-4-E4B-it-GGUF:UD-Q4_K_XL
+                &nbsp;&nbsp;hf://unsloth/gemma-4-E4B-it-GGUF:UD-Q4_K_XL
             </div>
         </div>
 
         <div class="card">
-            <h3>▸ Via MLX (Apple Silicon)</h3>
+            <h3>Via MLX (Apple Silicon nativo)</h3>
+            <p>Framework otimizado da Apple pra rodar modelos em M1/M2/M3/M4:</p>
+
             <div class="code-block">
                 <span class="label">Terminal</span>
                 pip install mlx-lm<br><br>
-                mlx_lm.generate --model google/gemma-4-e4b-it
+                mlx_lm.generate \<br>
+                &nbsp;&nbsp;--model google/gemma-4-e4b-it \<br>
+                &nbsp;&nbsp;--prompt "Explique IA em 3 frases"
             </div>
         </div>
 
         <div class="card">
-            <h3>▸ Via Google AI Studio</h3>
-            <p>Akses <a href="https://aistudio.google.com" style="color:var(--neon-blue)">aistudio.google.com</a> e selecione Gemma 4. Gratuito!</p>
+            <h3>Via Google AI Studio (Nuvem gratuita)</h3>
+            <p>Se quiser testar os modelos maiores (26B e 31B) sem hardware local: akses <a href="https://aistudio.google.com" style="color:var(--accent)">aistudio.google.com</a> e selecione Gemma 4. Gratuito pra experimentação.</p>
         </div>
     </div>
 
@@ -1070,37 +827,37 @@
                 <span class="toggle">+</span>
             </div>
             <div class="faq-answer">
-                <p>iOS 17+. Recomendado iPhone 15 Pro+ para melhor performance.</p>
+                <p>Precisa de iOS 17 ou superior. Na prática, funciona do iPhone XS pra cima. Mas pra performance ideal (respostas rápidas, sem travamento), o recomendado é iPhone 15 Pro ou mais recente, que tem chip com Neural Engine mais potente.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Precisa de internet?</span>
+                <span>Precisa de internet pra usar?</span>
                 <span class="toggle">+</span>
             </div>
             <div class="faq-answer">
-                <p>Só pra baixar o modelo. Depois, 100% offline!</p>
+                <p>Só pra baixar o modelo na primeira vez. Depois disso, funciona 100% offline — você pode até colocar em modo avião.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Quanto espaço ocupa?</span>
+                <span>Quanto de espaço ocupa?</span>
                 <span class="toggle">+</span>
             </div>
             <div class="faq-answer">
-                <p>E2B: &lt;1.5GB | E4B: ~2-3GB</p>
+                <p>O modelo E2B quantizado ocupa menos de 1.5GB. O E4B fica por volta de 2-3GB. O app em si é leve.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>É melhor que o ChatGPT?</span>
+                <span>É melhor que o ChatGPT no celular?</span>
                 <span class="toggle">+</span>
             </div>
             <div class="faq-answer">
-                <p>Mais rápido, privado e offline.-cloud ainda vence em complexidade.</p>
+                <p>São coisas diferentes. O ChatGPT roda na nuvem e usa modelos muito maiores (GPT-4o, o3). O Gemma 4 roda local — é mais rápido, mais privado e funciona offline. Pra tarefas do dia a dia (resumos, traduções, análise de imagem, código simples), o Gemma 4 dá conta. Pra tarefas complexas que exigem modelos gigantes, o cloud ainda leva vantagem.</p>
             </div>
         </div>
 
@@ -1110,7 +867,7 @@
                 <span class="toggle">+</span>
             </div>
             <div class="faq-answer">
-                <p>60% menos que versões anteriores. Otimizado para baixo consumo.</p>
+                <p>O Gemma 4 foi otimizado pra consumo baixo de energia. O Google informa que usa até 60% menos bateria que versões anteriores. Mas sessões longas e intensivas vão consumir mais — como qualquer app que usa processamento pesado.</p>
             </div>
         </div>
 
@@ -1120,31 +877,33 @@
                 <span class="toggle">+</span>
             </div>
             <div class="faq-answer">
-                <p>Sim! Licença Apache 2.0 — sem restrições.</p>
+                <p>Sim. Licença Apache 2.0 — sem restrições de uso comercial, fine-tuning ou deploy. Diferente do Llama que tem restrições pra empresas com mais de 700M de usuários.</p>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-number">07 — RECURSOS</div>
+        <div class="section-number">07 — Recursos</div>
         <h2>Links Úteis</h2>
 
         <div class="card">
             <ul>
-                <li><a href="https://apps.apple.com/app/google-ai-edge-gallery/id6749645337" style="color:var(--neon-blue)">AI Edge Gallery — App Store</a></li>
-                <li><a href="https://play.google.com/store/apps/details?id=com.google.ai.edge.gallery" style="color:var(--neon-blue)">AI Edge Gallery — Google Play</a></li>
-                <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/" style="color:var(--neon-purple)">Blog oficial Google</a></li>
-                <li><a href="https://huggingface.co/blog/gemma4" style="color:var(--neon-blue)">Hugging Face — Guia</a></li>
-                <li><a href="https://ollama.com/library/gemma4" style="color:var(--neon-purple)">Ollama — Gemma 4</a></li>
-                <li><a href="https://aistudio.google.com" style="color:var(--neon-blue)">Google AI Studio</a></li>
+                <li><a href="https://apps.apple.com/app/google-ai-edge-gallery/id6749645337" style="color:var(--accent)">AI Edge Gallery — App Store (iOS)</a></li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.google.ai.edge.gallery" style="color:var(--accent)">AI Edge Gallery — Google Play (Android)</a></li>
+                <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/" style="color:var(--accent)">Blog oficial Google — Anúncio do Gemma 4</a></li>
+                <li><a href="https://huggingface.co/blog/gemma4" style="color:var(--accent)">Hugging Face — Guia Gemma 4</a></li>
+                <li><a href="https://ollama.com/library/gemma4" style="color:var(--accent)">Ollama — Gemma 4</a></li>
+                <li><a href="https://ai.google.dev/gemma/docs/core/model_card_4" style="color:var(--accent)">Model Card oficial — Google AI</a></li>
+                <li><a href="https://github.com/google-ai-edge/gallery" style="color:var(--accent)">GitHub — AI Edge Gallery (open-source)</a></li>
+                <li><a href="https://aistudio.google.com" style="color:var(--accent)">Google AI Studio — Teste gratuito na nuvem</a></li>
             </ul>
         </div>
     </div>
 
     <div class="footer">
         <span class="brand">@mikaeldionatan_</span>
-        <p>Guia criado em abril de 2026 · Compartilhe com quem precisa</p>
-        <p style="margin-top:10px"><a href="https://www.instagram.com/mikaeldionatan_/">Instagram</a></p>
+        <p>Guia criado em abril de 2026 · Compartilhe com quem precisa saber disso</p>
+        <p style="margin-top:6px"><a href="https://www.instagram.com/mikaeldionatan_/">Instagram</a></p>
     </div>
 
 </div>
@@ -1165,10 +924,9 @@ class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 2 + 0.5;
-        this.color = Math.random() > 0.5 ? '0, 209, 255' : '168, 85, 247';
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.radius = Math.random() * 1.5 + 0.5;
     }
     update() {
         this.x += this.vx;
@@ -1179,27 +937,26 @@ class Particle {
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${this.color}, 0.4)`;
+        ctx.fillStyle = 'rgba(0, 255, 170, 0.25)';
         ctx.fill();
     }
 }
 
-for (let i = 0; i < 80; i++) particles.push(new Particle());
+for (let i = 0; i < 60; i++) particles.push(new Particle());
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => { p.update(); p.draw(); });
-    
     for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 150) {
+            if (dist < 120) {
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(0, 209, 255, ${0.04 * (1 - dist / 150)})`;
+                ctx.strokeStyle = `rgba(0, 255, 170, ${0.06 * (1 - dist / 120)})`;
                 ctx.lineWidth = 0.5;
                 ctx.stroke();
             }

@@ -33,6 +33,70 @@
             color: var(--frost);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 209, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 209, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 209, 255, 0.03) 0%, transparent 70%);
+            animation: backgroundPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: particleFloat 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 12s; }
+        .particle:nth-child(2) { left: 20%; top: 80%; animation-delay: 2s; animation-duration: 18s; }
+        .particle:nth-child(3) { left: 30%; top: 40%; animation-delay: 4s; animation-duration: 14s; }
+        .particle:nth-child(4) { left: 50%; top: 60%; animation-delay: 1s; animation-duration: 16s; }
+        .particle:nth-child(5) { left: 70%; top: 30%; animation-delay: 3s; animation-duration: 20s; }
+        .particle:nth-child(6) { left: 80%; top: 70%; animation-delay: 5s; animation-duration: 13s; }
+        .particle:nth-child(7) { left: 90%; top: 50%; animation-delay: 2.5s; animation-duration: 17s; }
+        .particle:nth-child(8) { left: 15%; top: 60%; animation-delay: 1.5s; animation-duration: 15s; }
+        .particle:nth-child(9) { left: 60%; top: 15%; animation-delay: 3.5s; animation-duration: 19s; }
+        .particle:nth-child(10) { left: 45%; top: 85%; animation-delay: 4.5s; animation-duration: 11s; }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            25% { transform: translateY(-30px) translateX(15px); opacity: 0.6; }
+            50% { transform: translateY(-15px) translateX(-10px); opacity: 0.2; }
+            75% { transform: translateY(-40px) translateX(20px); opacity: 0.5; }
+        }
+
+        header, main, footer {
+            position: relative;
+            z-index: 1;
         }
 
         .container {
@@ -344,6 +408,7 @@
             margin: 16px 0;
             overflow-x: auto;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
 
         .code-block code {
@@ -357,24 +422,86 @@
             color: var(--ghost);
         }
 
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--obsidian-elevated);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--ghost);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: var(--neon-cyan);
+            color: var(--obsidian);
+            border-color: var(--neon-cyan);
+        }
+
+        .copy-btn.copied {
+            background: var(--emerald);
+            color: var(--obsidian);
+            border-color: var(--emerald);
+        }
+
         .faq-item {
             background: var(--obsidian-light);
             border-radius: 8px;
-            padding: 20px;
+            padding: 0;
             margin-bottom: 12px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(0, 209, 255, 0.3);
         }
 
         .faq-question {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 600;
             color: var(--frost);
-            margin-bottom: 8px;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 209, 255, 0.05);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            color: var(--neon-cyan);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
         }
 
         .faq-answer {
             font-size: 14px;
             color: var(--ghost);
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 20px 20px;
         }
 
         .links-grid {
@@ -483,6 +610,18 @@
     </style>
 </head>
 <body>
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
     <header>
         <div class="container">
             <span class="badge">GUIA COMPLETO — ABRIL 2026</span>
@@ -925,5 +1064,33 @@ mlx_lm.generate \
             </a>
         </div>
     </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('.code-block').forEach(block => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.textContent = 'Copiar';
+            block.appendChild(btn);
+
+            btn.addEventListener('click', () => {
+                const code = block.querySelector('code').textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.textContent = 'Copiado!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = 'Copiar';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
